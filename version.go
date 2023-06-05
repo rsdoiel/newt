@@ -13,10 +13,14 @@ const (
 
     // ReleaseHash, the Git hash when version.go was generated
 <<<<<<< HEAD
+<<<<<<< HEAD
     ReleaseHash = "cdae4cb"
 =======
     ReleaseHash = "c3db5c0"
 >>>>>>> 13a8c0bc414fc612da91eba1fbacfc8b8973ed13
+=======
+    ReleaseHash = "8320ad8"
+>>>>>>> 9d4adca9f257e614563efd08a6c971af97f19b49
 
     LicenseText = `
 Redistribution and use in source and binary forms, with or without
