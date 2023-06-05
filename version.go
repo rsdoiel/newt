@@ -15,6 +15,7 @@ const (
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     ReleaseHash = "cdae4cb"
 =======
     ReleaseHash = "c3db5c0"
@@ -25,6 +26,9 @@ const (
 =======
     ReleaseHash = "e374317"
 >>>>>>> 763ec1a429ed0a9326f33fe7e3edff6a64c4ccf1
+=======
+    ReleaseHash = "763ec1a"
+>>>>>>> c6dd4b0977b25c5781ac0fd5eb02feac3139f013
 
     LicenseText = `
 Redistribution and use in source and binary forms, with or without
