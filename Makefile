@@ -124,6 +124,9 @@ clean:
 	-if [ -d dist ]; then rm -fR dist; fi
 	-if [ -d testout ]; then rm -fR testout; fi
 	-for MAN_PAGE in $(MAN_PAGES); do if [ -f man/man1/$$MAN_PAGE.1 ]; then rm man/man1/$$MAN_PAGE.1; fi;done
+	-make -f website.mak clean
+	-make -f presentation.mak clean
+
 
 status:
 	git status
@@ -178,6 +181,13 @@ dist/Windows-arm64: $(PROGRAMS)
 	@cd dist && zip -r $(PROJECT)-v$(VERSION)-Windows-arm64.zip LICENSE codemeta.json CITATION.cff *.md bin/* man/*
 	@rm -fR dist/bin
 
+# Raspberry Pi OS 32 bit, reported by Raspberry Pi 3B+
+dist/Linux-armv7l: $(PROGRAMS)
+	@mkdir -p dist/bin
+	@for FNAME in $(PROGRAMS); do env GOOS=linux GOARCH=arm GOARM=7 go build -o "dist/bin/$${FNAME}" cmd/$${FNAME}/*.go; done
+	@cd dist && zip -r $(PROJECT)-v$(VERSION)-Linux-armv7l.zip LICENSE codemeta.json CITATION.cff *.md bin/* man/*
+	@rm -fR dist/bin
+
 dist/RaspberryPiOS-arm7: $(PROGRAMS)
 	@mkdir -p dist/bin
 	@for FNAME in $(PROGRAMS); do env GOOS=linux GOARCH=arm GOARM=7 go build -o "dist/bin/$${FNAME}" cmd/$${FNAME}/*.go; done
@@ -193,6 +203,6 @@ distribute_docs:
 	@cp -v INSTALL.md dist/
 	@cp -vR man dist/
 
-release: .FORCE save build save distribute_docs dist/Linux-x86_64 dist/Linux-aarch64 dist/macOS-x86_64 dist/macOS-arm64 dist/Windows-x86_64 dist/Windows-arm64 dist/RaspberryPiOS-arm7
+release: .FORCE installer.sh save build save distribute_docs dist/Linux-x86_64 dist/Linux-aarch64 dist/macOS-x86_64 dist/macOS-arm64 dist/Windows-x86_64 dist/Windows-arm64 dist/RaspberryPiOS-arm7 dist/Linux-armv7l
 
 .FORCE:
